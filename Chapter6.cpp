@@ -249,5 +249,49 @@ void Fpreference(bop* p)
 
 
 
+/* 
+// task 5
+#include <iostream>
+using namespace std;
 
+float tollage(float n);
+
+int main()
+{
+	float earning;
+	cout << "Please input your earning:";
+	cin >> earning;
+	while(cin.good() && earning >=0)
+	{
+		float tollageNumber = tollage(earning);
+		cout << earning << "should pay " << tollageNumber << "tollage"<<endl;
+		cout << "Please input next earning:";
+		cin >> earning;
+	}
+	cout << "Process is over."<<endl;
+	return 0;
+}
+
+float tollage(float n)
+{
+	float tollage;
+	if(n<=5000)
+	{
+		tollage = 0 ;
+	}
+	else if(n>5000 && n<= 15000)
+	{
+		tollage = (n-5000) * 0.1;
+	}
+	else if(n > 15000 && n <= 35000)
+	{
+		tollage = 10000*0.1 + (n-15000)*0.15; 
+	}
+	else if(n > 35000)
+	{
+		tollage = 10000*0.1 + 20000*0.15 + (n-35000) * 0.2;
+	}
+	return tollage;
+}
+*/
 
