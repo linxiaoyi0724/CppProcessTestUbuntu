@@ -462,30 +462,35 @@ int main()
 
 
 
-
-#include<iostream>
-#include<fstream>
-#include<string>
+/* 
+// task 8
+#include <iostream>
+#include <fstream>
 using namespace std;
 int main()
 {
-	char name[80];
-	ifstream infile;
-	cout << "Please input name of data file: ";
-	cin.getline(name,80);
-	int count = 0;
-	infile.open(name);
-	if(!infile.is_open())
+	char fileName[80];
+	cout << "Please input the file name: ";
+	cin.getline(fileName, 80);
+	ifstream inFile;
+	inFile.open(fileName);
+	if(!inFile.is_open())
 	{
-		cout<<"the file is not exist"<<endl;
+		cout << "The file is not exist." <<endl;
 	}
-	while(infile.good())
+	int count = 0;
+	char ch;
+	inFile >> ch;
+	while (inFile.good())
 	{
 		++count;
+		inFile >> ch;
 	}
-	if(infile.eof())
+	if(inFile.eof())
 	{
-		cout <<"Read out "<<endl;
+		cout << "read out." <<endl;
 	}
-	return 0;
+	cout << "The file have " << count << " character."<<endl;
+	return 0; 
 }
+*/

@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 PROJECT(CppProcessTestUbuntu)
+file(GLOB MY_FILES "*.txt")
+file(COPY ${MY_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 set(CMAKE_BUILD_TYPE Debug)
 add_subdirectory(src)
