@@ -462,7 +462,7 @@ int main()
 
 
 
-/* 
+/*
 // task 8
 #include <iostream>
 #include <fstream>
