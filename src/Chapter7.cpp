@@ -34,6 +34,11 @@ double  getAverage(double x, double y)
 
 
 
+
+
+
+/*
+// task 2
 #include <iostream>
 
 const int maxSize = 10;
@@ -82,3 +87,60 @@ double getAverage(double arr[], const int count)
     }
     return  total / count;
 }
+*/
+
+
+
+
+
+
+
+
+/*
+//task 3
+#include <iostream>
+struct box
+{
+    char maker[40];
+    float height;
+    float width;
+    float length;
+    float volume;
+};
+
+void displayMember(box b);
+void setVolume(box* pb);
+
+int main()
+{
+    box b = {"xiaoyi",
+             3,
+             4,
+             5};
+
+    setVolume(&b);
+    displayMember(b);
+    return  0;
+}
+
+void displayMember(box b)
+{
+    std::cout << "The box's maker is : " << b.maker <<std::endl;
+    std::cout << "The box's height is : " << b.height << std::endl;
+    std::cout << "The box's width is : " << b.width << std::endl;
+    std::cout << "The box's length is : " << b.length << std::endl;
+    std::cout << "The box's volume is : " << b.volume <<std::endl;
+}
+
+void setVolume(box* pb)
+{
+    pb->volume = pb->length * pb->height * pb->width;
+}
+*/
+
+
+
+
+
+
+
