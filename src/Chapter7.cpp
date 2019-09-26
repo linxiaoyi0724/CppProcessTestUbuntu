@@ -263,3 +263,77 @@ void Reverse_array(double arr[], int len) {
 
 
 
+
+
+
+
+/*
+//task 7
+#include <iostream>
+const int maxSize = 5;
+double* fillArray(double* pBegin, double* pEnd);
+void showArray(double* pBegin, double* pEnd);
+void revalue(double r, double* pBegin, double* pEnd);
+int main()
+{
+    double propertise[maxSize];
+    double* pEnd;
+    pEnd = fillArray(propertise,propertise+maxSize);
+    showArray(propertise, pEnd);
+    std::cout << "Enter reassessment rate: ";
+    double r;
+    std::cin >> r;
+    revalue(r, propertise, pEnd);
+    std::cout << "Done" << std::endl;
+    return 0;
+}
+
+double* fillArray(double* pBegin, double* pEnd)
+{
+    double temp;
+    double* pt;
+    for(pt = pBegin; pt!=pEnd;pt++)
+    {
+        std::cout << "Enter value #1: ";
+        std::cin >> temp;
+        if(!std::cin)
+        {
+            std::cin.clear();
+            while (std::cin.get()!='\n')
+            {
+                continue;
+            }
+            std::cout << "Bad input" <<std::endl;
+            break;
+        }
+        else if(temp < 0)
+        {
+            break;
+        }
+        *pt = temp;
+    }
+    return pt;
+}
+
+void showArray(double* pBegin, double* pEnd)
+{
+    double* pt;
+    for(pt = pBegin; pt!=pEnd; pt++)
+    {
+        std::cout << "Property # " << *pt << std::endl;
+    }
+}
+
+void revalue(double r, double* pBegin, double* pEnd)
+{
+    double* pt;
+    for(pt = pBegin; pt!= pEnd; pt++)
+    {
+        *pt *= r;
+        std::cout << "Property #" << *pt <<std::endl;
+    }
+}
+*/
+
+
+
