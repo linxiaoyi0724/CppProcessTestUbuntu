@@ -142,5 +142,124 @@ void setVolume(box* pb)
 
 
 
+/*
+// task 4
+#include <iostream>
+const int totalNumber = 47;
+const int selectNumber = 5;
+int main()
+{
+    double result = 1;
+    for(double i = totalNumber, j = 5; j > 0; i--,j-- )
+    {
+        result *= j/totalNumber;
+    }
+    result = result / 27;
+    std::cout << "The winning probability is " << result <<std::endl;
+    return  0;
+}
+*/
+
+
+
+
+
+
+
+
+/*
+// task 5
+#include <iostream>
+double calculatesFactorial(int num);
+int main()
+{
+    int n;
+    std::cout.setf(std::ios_base::fixed);
+    std::cout << "Please input you number(q to quit):";
+    while (std::cin >> n)
+    {
+        double result;
+        result = calculatesFactorial(n);
+        std::cout << "The " << n << " 's Factorial is " << result << std::endl;
+        std::cout << "Please input you number(q to quit):";
+    }
+    std::cout << "Done" <<std::endl;
+    return  0;
+}
+
+double calculatesFactorial(int num)
+{
+    if (num == 1 )
+    {
+        return  1;
+    }
+    return  num * calculatesFactorial(num -1);
+}
+*/
+
+
+
+
+
+
+
+
+
+
+/*
+// task 6
+#include <iostream>
+const int len = 10;
+int Fill_array(double arr[], int len);
+void Show_array(double arr[], int len);
+void Reverse_array(double arr[], int len);
+int main()
+{
+    double numArr[len];
+    int count = Fill_array(numArr, len);
+    Show_array(numArr, count);
+    Reverse_array(numArr, count);
+    Show_array(numArr, count);
+    Reverse_array(numArr+1,count-2);
+    Show_array(numArr, count);
+    return  0;
+}
+
+int Fill_array(double arr[], int len)
+{
+    int count = 0;
+    std::cout << "Please input double number: ";
+    while(std::cin >> arr[count] && count < len)
+    {
+        count++;
+        std::cout << "Please input double number: ";
+    }
+    return  count;
+}
+
+void Show_array(double arr[], int len)
+{
+    std::cout << "The array number is ";
+    for(int i = 0; i < len; i++)
+    {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+void Reverse_array(double arr[], int len) {
+    double temp;
+    int mid = len / 2;
+    for (int i = 0, j = len; i < mid; i++, len--)
+    {
+        temp = arr[i];
+        arr[i] = arr[len-1];
+        arr[len-1] = temp;
+    }
+}
+*/
+
+
+
 
 
