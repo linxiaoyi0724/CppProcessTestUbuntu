@@ -424,3 +424,38 @@ void display3(const student pa[], int n)
 
 
 
+
+
+/*
+#include <iostream>
+double add(double x, double y);
+double calculate(double x, double y, double (*pf)(double, double));
+int main()
+{
+    double x,y;
+    std::cout << "Please input your data: ";
+    while(std::cin>>x>>y)
+    {
+        double total = calculate(x,y,add);
+        std::cout << "Total is " << total <<std::endl;
+    }
+    return  0;
+}
+
+double add(double x , double y)
+{
+    return  x + y;
+}
+
+double calculate(double x , double y, double(*pf)(double, double))
+{
+    return (*pf)(x,y);
+}
+*/
+
+
+
+
+
+
+
