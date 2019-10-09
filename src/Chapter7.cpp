@@ -427,6 +427,7 @@ void display3(const student pa[], int n)
 
 
 /*
+ //task 9-1
 #include <iostream>
 double add(double x, double y);
 double calculate(double x, double y, double (*pf)(double, double));
@@ -454,6 +455,52 @@ double calculate(double x , double y, double(*pf)(double, double))
 */
 
 
+
+
+
+/*
+ //task 9-2
+#include <iostream>
+double add(double x, double y);
+double sub(double x, double y);
+double mix(double x, double y);
+double calculate(double x, double y, double (*pf)(double, double));
+int main()
+{
+    double (*pf[3])(double, double) = {add, sub, mix};
+    double x,y;
+    std::cout << "Please input your data(q to quit): ";
+    while (std::cin>>x>>y)
+    {
+        for(int i = 0; i <3; i++)
+        {
+            double total = calculate(x,y,(*pf[i]));
+            std::cout << "The total is : " << total << std::endl;
+        }
+    }
+    return 0;
+}
+
+double add(double x , double y)
+{
+    return  x + y;
+}
+
+double sub(double x, double y)
+{
+    return x-y;
+}
+
+double mix(double x, double y)
+{
+    return x*y;
+}
+
+double calculate(double x , double y, double (*pf)(double, double))
+{
+    return (*pf)(x,y);
+}
+*/
 
 
 
