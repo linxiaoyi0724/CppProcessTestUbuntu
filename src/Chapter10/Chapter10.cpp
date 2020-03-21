@@ -100,7 +100,7 @@ int main()
     return 0;
 }
 */
-
+    
 
 
 /*
@@ -117,3 +117,63 @@ int main()
 
 
 
+//task 8
+
+#include "./List.h"
+#include <cctype>
+#include <iostream>
+int main()
+{
+    int data;
+    LT::List l;
+    char ch;
+
+    std::cout << "Please enter c to create list, enter p to process list, enter s to showitem, enter q to quit" <<  std::endl;
+
+    while ( std::cin >> ch && toupper(ch) != 'Q')
+    {
+        while (std::cin.get() != '\n')
+        {
+            continue;
+        }
+
+        switch (ch)
+        {
+        case 'C':
+        case 'c':
+            if(l.IsFull())
+            {
+                std::cout << "The list is full. " << std::endl;
+            }
+            else
+            {
+                std::cout << "Enter the data: ";
+                std::cin >> data;
+                l.Add(data);
+            }
+            break;
+        case 'P':
+        case 'p':
+            if(l.IsEmpty())
+            {
+                std::cout << "The list already empty!" << std::endl;
+            }
+            else
+            {
+                l.visit(LT::Plus100);
+                std::cout << "Enery data has plused 100" << std::endl;
+            }
+
+            break;
+        case 's':
+        case 'S':
+            l.showItem();
+            break;
+        }
+
+        std::cout << "Please enter C to create your list , P to process the list, q to quit:" << std::endl;
+    }
+    l.showItem();
+    std::cout << "Bye" << std::endl;
+    return 0;
+}
