@@ -117,6 +117,8 @@ int main()
 
 
 
+
+/*
 //task 8
 
 #include "./List.h"
@@ -177,3 +179,4 @@ int main()
     std::cout << "Bye" << std::endl;
     return 0;
 }
+*/
