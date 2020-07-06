@@ -42,7 +42,7 @@ int main()
 
 
 
-
+/*
 // task 3
 #include <iostream>
 #include <ctime>
@@ -91,6 +91,10 @@ int main()
     cout << "average steps is " << totalSteps / N << endl;
     return 0;
 }
+*/
+
+
+
 
 
 
