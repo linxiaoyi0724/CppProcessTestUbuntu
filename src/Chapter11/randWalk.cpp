@@ -41,6 +41,9 @@ int main()
 
 
 
+
+
+// task 3
 #include <iostream>
 #include <ctime>
 #include "vect.h"
@@ -50,23 +53,43 @@ int main()
 {
     int N;
     Vector result(0.0,0.0);
+    Vector step;
     srand(time(0));
+    int minSteps = 99999;
+    int maxSteps = 0;
+    int totalSteps = 0;
     cout << "Please enter your number of times you want test: ";
     cin >>N;
     for(int i = 0; i < N; i++)
     {
         int steps = 0;
         double dstep;
-        
-        cout << "Please enter your length of steps: ";
-        if(!(cin>>dstep))
+        double target;
+        double direction;
+
+        cout << "Please enter your length of steps and your target: ";
+        if(!(cin>>dstep>>target))
             break;
         while (result.magval() < target)
         {
-            /* code */
+            direction = rand()%360;
+            step.set(dstep, direction, 'p');
+            result = result+step;
+            steps++;
         }
-        
+
+        if(steps < minSteps)
+            minSteps = steps;
+        if(steps > maxSteps)
+            maxSteps = steps;
+        totalSteps += steps;
+        result.set(0,0,'r');
     }
+
+    cout << "max steps is " << maxSteps << endl;
+    cout << "min steps is " << minSteps << endl;
+    cout << "average steps is " << totalSteps / N << endl;
+    return 0;
 }
 
 
