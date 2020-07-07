@@ -19,7 +19,7 @@ class Complex0
         friend Complex0 operator*(double x, const Complex0 c);
         friend Complex0 operator~(const Complex0 c);
 
-        friend std::istream& operator>>(std::istream& in, Complex0 c);
+        friend std::istream& operator>>(std::istream& in, Complex0& c);
         friend std::ostream& operator<<(std::ostream& os, Complex0 c);
 };
 

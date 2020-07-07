@@ -1,3 +1,5 @@
+/*
+// task 7
 #include <iostream>
 #include "complex0.h"
 using namespace std;
@@ -49,7 +51,7 @@ Complex0 operator~(const Complex0 c)
 }
 
 
-std::istream& operator>>(std::istream& in, Complex0 c)
+std::istream& operator>>(std::istream& in, Complex0& c)
 {
     cout << "real: ";
     in >> c.real;
@@ -60,5 +62,6 @@ std::istream& operator>>(std::istream& in, Complex0 c)
 
 std::ostream& operator<<(std::ostream& os, Complex0 c)
 {
-    os << "(" << c.real << ", " << c.imag << ")";
+    os << "(" << c.real << ", " << c.imag << "i)";
 }
+*/
