@@ -26,7 +26,8 @@ int main()
 */
 
 
-
+/*
+//task 6
 #include <iostream>
 #include "stonewt.h"
 using namespace std;
@@ -64,4 +65,7 @@ int main()
     cout << "The number of Stone >= 11 is " << count <<endl;
     return 0;
 }
+*/
+
+
 
