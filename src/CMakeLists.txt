@@ -1,4 +1,5 @@
 aux_source_directory(. SRC_LIST)
 aux_source_directory(./Chapter10 SRC_LIST2)
 aux_source_directory(./Chapter11 SRC_LIST3)
-add_executable(CppProcessTestUbuntu ${SRC_LIST} ${SRC_LIST2} ${SRC_LIST3})
+aux_source_directory(./Chapter12 SRC_LIST4)
+add_executable(CppProcessTestUbuntu ${SRC_LIST} ${SRC_LIST2} ${SRC_LIST3} ${SRC_LIST4})
