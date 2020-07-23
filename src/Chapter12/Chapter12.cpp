@@ -299,3 +299,151 @@ int main()
  }
 
  */
+
+
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+class Stock
+{
+	private:
+		char* company;
+		int len;
+		int shares;
+		double share_val;
+		double totoal_val;
+		void set_tot(){totoal_val = share_val * shares;}
+
+	public:
+		Stock();
+		Stock(const char* co, int n = 0, double pr = 0.0);
+		~Stock();
+		void Buy(int num, double price);
+		void Sell(int num, double price);
+		void Update(double price);
+
+		friend ostream& operator<<(ostream& os,const Stock& st);
+		const Stock& TopVal(const Stock& s)const;
+};
+
+
+Stock::Stock()
+{
+	int len = 4;
+	company = new char[8];
+	std::strcpy(company,"no name");
+	shares = 0;
+	share_val = 0;
+	totoal_val = 0;
+}
+
+
+Stock::Stock(const char* co, int n, double pr)
+{
+	len =  strlen(co);
+	company = new char[len+1];
+	std::strcpy(company, co);
+	if(n < 0)
+	{
+		std::cerr<<"Number of shares can't be negative." << company << " shares set to 0" <<endl;
+		shares = 0;
+	}
+	else
+	{
+		shares = n;
+	}
+	share_val = pr;
+	set_tot();
+	
+}
+
+Stock::~Stock()
+{
+	delete[] company;
+}
+
+void Stock::Buy(int num, double price)
+{
+	if(num < 0)
+	{
+		std::cerr<<"Number of shares purchased can't be negative." << "Transaction is aborted."<<endl; 
+	}
+	else
+	{
+		shares += num;
+		share_val = price;
+		set_tot();
+	}
+}
+
+
+void Stock::Sell(int num, double price)
+{
+	if(num < 0)
+	{
+		std::cerr<<"Number of shares sold can't be negative." << "Transaction is abort."<<endl;
+	}
+	else if(num > shares)
+	{
+		std::cerr<<"You can't sell more than you have!" << " Transaction is aborted."<<endl;
+	}
+	else
+	{
+		shares -= num;
+		share_val = price;
+		set_tot();
+	}
+	
+}
+
+void Stock::Update(double price)
+{
+	share_val = price;
+	set_tot();
+}
+
+ostream& operator << (ostream& os, const Stock& st)
+{
+	os<<"Company: "<<st.company << " Shares: " << st.shares << endl << " Share Price:$ "<<st.share_val << " Total Worth:$  " << st.totoal_val <<endl;
+}
+
+const Stock& Stock::TopVal(const Stock& s)const
+{
+	if(s.totoal_val > totoal_val)
+	{
+		return s;
+	}
+	else
+	{
+		return *this;
+	}
+	
+}
+
+
+int main()
+{
+	const int STKS = 4;
+	Stock stocks[STKS] = {Stock("NanoSmart", 12, 20.0), 
+						  Stock("Boffo Objects", 200, 2.0),
+						  Stock("Monolithic Obelisks", 130, 3.25),
+						  Stock("Fleep Enterprises", 60, 6.5)};
+
+	cout.precision(2);
+	cout.setf(ios_base::fixed, ios_base::floatfield);
+	cout.setf(ios_base::showpoint);
+	cout << "Stock holdings: "<<endl;
+	int st;
+	for(st = 0; st < STKS; st++)
+		cout << stocks[st];
+	
+	Stock top = stocks[0];
+	for(st = 1; st < STKS; st++)
+	{
+		top = top.TopVal(stocks[st]);
+	}
+	cout << endl<<"Most valueable holding: "<<endl;
+	cout << top;
+	return 0;
+}
