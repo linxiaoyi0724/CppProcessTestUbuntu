@@ -301,7 +301,8 @@ int main()
  */
 
 
-
+/*
+//Task 3
 #include <iostream>
 #include <cstring>
 using namespace std;
@@ -447,3 +448,226 @@ int main()
 	cout << top;
 	return 0;
 }
+*/
+
+
+
+/*
+// Task 4
+#include <string.h>
+#include <iostream>
+using namespace std;
+typedef unsigned long Item;
+class Stack
+{
+private:
+	enum
+	{
+		MAX = 10
+	};
+
+	Item *pitems;
+	int size;
+	int top;
+
+public:
+	Stack(int n = 10);
+	Stack(const Stack& st);
+	~Stack();
+	bool IsEmpty()const;
+	bool IsFull()const;
+	bool Push(const Item& item);
+	bool Pop(Item& item);
+	Stack& operator=(const Stack& st);
+
+};
+
+Stack::Stack(int n)
+{
+	pitems = new Item[n + 1];
+	size = 0;
+	top = 0;
+}
+
+Stack::Stack(const Stack& st)
+{
+	size = st.size;
+	pitems = new Item[size + 1];
+	pitems = st.pitems;
+	top = st.top;
+}
+
+Stack::~Stack()
+{
+	delete[] pitems;
+}
+
+bool Stack::IsEmpty()const
+{
+	if (top == 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Stack::IsFull()const
+{
+	if (size == MAX)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Stack::Push(const Item& item)
+{
+	if (top < MAX)
+	{
+		pitems[top++] = item;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Stack::Pop(Item& item)
+{
+	if (top > 0)
+	{
+		item = pitems[--top];
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+Stack& Stack::operator=(const Stack& st)
+{
+	if (this == &st)
+	{
+		return *this;
+	}
+
+	delete[] pitems;
+	pitems = new Item[st.size + 1];
+	size = st.size;
+	pitems = st.pitems;
+	top = st.top;
+}
+
+
+int main()
+{
+	Stack  st;
+	char ch;
+	unsigned long po;
+
+	cout << "Please enter A to add a purchase order" << endl << "P to processs a PO, or Q to quit." << endl;
+	while (cin>>ch && toupper(ch) != 'Q')
+	{
+		while (cin.get()!='\n')
+		{
+			continue;
+		}
+		if (!isalpha(ch))
+		{
+			cout << '\a';
+			continue;
+		}
+		switch (ch)
+		{
+		case 'A':
+		case 'a':
+			cout << "Enter a PO number to add: ";
+			cin >> po;
+			if (st.IsFull())
+			{
+				cout << "Stack is full" << endl;
+			}
+			else
+			{
+				st.Push(po);
+			}
+			break;
+
+		case 'p':
+		case 'P':
+			if (st.IsEmpty())
+			{
+				cout << "Stack is already empty." << endl;
+			}
+			else
+			{
+				st.Pop(po);
+				cout << "PO# " << po << " popped" << endl;
+			}
+			break;
+		}
+
+		cout << "Please enter A to add a purchase order" << endl << "P to processs a PO, or Q to quit." << endl;
+
+	}
+	cout << "Bye" << endl;
+	return 0;
+}
+*/
+
+
+
+
+//Task 5
+
+class Customer
+{
+private:
+	long arrive;
+	int processtime;
+
+public:
+	Customer() :arrive(0), processtime(0) {}
+	void Set(long when);
+	long When()const { return arrive; }
+	long Ptime()const { return processtime; }
+};
+
+typedef Customer Item;
+
+class Queue
+{
+private:
+	struct Node
+	{
+		Item item;
+		struct  Node* next;
+	};
+
+	enum{Q_Size = 10};
+
+	Node* front;
+	Node* rear;
+
+	int items;
+	const int qSize;
+	Queue(const Queue& q):qSize(0){}
+	Queue& operator=(const Queue& q) { return *this; }
+
+public:
+	Queue(int qs = Q_Size);
+	~Queue();
+	bool IsEmpty()const;
+	bool IsFull()const;
+	int QueueCount()const;
+	bool EnQueue(const Item& item);
+	bool DeQueue(Item& item);
+};
