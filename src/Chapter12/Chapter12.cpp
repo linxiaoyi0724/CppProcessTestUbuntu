@@ -626,48 +626,367 @@ int main()
 
 
 
-//Task 5
+// //Task 5
+// #include <cstdlib>
+// #include <ctime>
+// #include <iostream>
+// #include <cmath>
+// class Customer
+// {
+// private:
+// 	long arrive;
+// 	int processtime;
 
-class Customer
+// public:
+// 	Customer() :arrive(0), processtime(0) {}
+// 	void Set(long when);
+// 	long When()const { return arrive; }
+// 	long Ptime()const { return processtime; }
+// };
+
+// typedef Customer Item;
+
+// class Queue
+// {
+// private:
+// 	struct Node
+// 	{
+// 		Item item;
+// 		struct  Node* next;
+// 	};
+
+// 	enum{Q_Size = 10};
+
+// 	Node* front;
+// 	Node* rear;
+
+// 	int items;
+// 	const int qSize;
+// 	Queue(const Queue& q):qSize(0){}
+// 	Queue& operator=(const Queue& q) { return *this; }
+
+// public:
+// 	Queue(int qs = Q_Size);
+// 	~Queue();
+// 	bool IsEmpty()const;
+// 	bool IsFull()const;
+// 	int QueueCount()const;
+// 	bool EnQueue(const Item& item);
+// 	bool DeQueue(Item& item);
+// };
+
+// Queue::Queue(int qs) : qSize(qs)
+// {
+// 	front = rear = NULL;
+// 	items = 0;
+// }
+
+// Queue::~Queue()
+// {
+// 	Node* temp;
+// 	while (front != NULL)
+// 	{
+// 		temp = front;
+// 		front = front->next;
+// 		delete temp;
+// 	}	
+// }
+
+// bool Queue::IsEmpty()const
+// {
+// 	return items == 0;
+// }
+
+// bool Queue::IsFull()const
+// {
+// 	return items == qSize;
+// }
+
+// int Queue::QueueCount()const
+// {
+// 	return items;
+// }
+
+// bool Queue::EnQueue(const Item& item)
+// {
+// 	if(IsFull())
+// 	{
+// 		return false;
+// 	}
+
+// 	Node* add = new Node;
+// 	if(add == NULL)
+// 	{
+// 		return false;
+// 	}
+
+// 	add->item = item;
+// 	add->next = NULL;
+
+// 	items++;
+// 	if(front == NULL)
+// 	{
+// 		front = add;
+// 	}
+// 	else
+// 	{
+// 		rear->next = add;
+// 	}
+// 	rear = add;
+// 	return true;
+// }
+
+
+// bool Queue::DeQueue(Item& item)
+// {
+// 	if(front == NULL)
+// 	{
+// 		return false;
+// 	}
+
+// 	item = front->item;
+// 	items--;
+
+// 	Node* temp = front;
+// 	front = front->next;
+// 	delete temp;
+
+// 	if(items == 0)
+// 	{
+// 		rear = NULL;
+// 	}
+// 	return true;
+// }
+
+// void Customer::Set(long when)
+// {
+// 	processtime = std::rand() % 3 +1;
+// 	arrive = when;
+// }
+
+
+// const int MIN_PER_HR = 60;
+// bool NewCustomer(double x);
+
+// int main()
+// {
+// 	using namespace std;
+// 	srand(time(0));
+// 	cout << "Case Study: Bank of Heather Automatic Teller: "<<endl;
+// 	cout << "Enter maximum size of queue:";
+// 	int qs;
+// 	cin >>qs;
+// 	Queue line(qs);
+
+// 	cout << "Enter the number of simulation hours:";
+// 	int hours;
+// 	cin >> hours;
+
+// 	long cyclelLimit = MIN_PER_HR * hours;
+
+// 	double perhour = 1;
+
+// 	double min_per_cust;
+
+// 	long turnAways = 0;
+// 	long customers = 0;
+// 	long severd = 0;
+// 	long sum_line = 0;
+// 	int wait_time = 0;
+// 	long line_wait = 0;
+
+// 	while (1)
+// 	{
+// 		min_per_cust = MIN_PER_HR / perhour;
+// 		Item temp;
+// 		turnAways = 0;
+// 		customers = 0;
+// 		severd = 0;
+// 		sum_line = 0;
+// 		wait_time = 0;
+// 		line_wait = 0;
+
+// 		for(int cycle = 0; cycle < cyclelLimit; cycle++)
+// 		{
+// 			if(NewCustomer(min_per_cust))
+// 			{
+// 				if(line.IsFull())
+// 				{
+// 					turnAways++;
+// 				}
+// 				else
+// 				{
+// 					customers++;
+// 					temp.Set(cycle);
+// 					line.EnQueue(temp);
+// 				}
+// 			}
+
+// 			if(wait_time <= 0 && !line.IsEmpty())
+// 			{
+// 				line.DeQueue(temp);
+// 				wait_time = temp.Ptime();
+// 				line_wait += cycle-temp.When();
+// 				severd++;
+// 			}
+// 			if(wait_time>0)
+// 			{
+// 				wait_time--;
+// 			}
+// 			sum_line += line.QueueCount();
+// 		}
+// 		if (fabs(double(line_wait) / severd - 1.0) < 0.1)
+// 		{
+// 			cout << "customers accepted: " << customers << endl;
+// 			cout << "customers served: " << severd << endl;
+// 			cout << "trunaways: " << turnAways << endl;
+// 			cout << "average queue size: ";
+// 			cout.precision(2);
+// 			cout.setf(ios_base::fixed, ios_base::floatfield);
+// 			cout.setf(ios_base::showpoint);
+// 			cout << (double)sum_line / cyclelLimit << endl;
+// 			cout << "average wait time: " << (double)line_wait / severd << " minutes" << endl;
+
+//              cout<<"fabs((double)line_wait / served-1.0):"<<fabs((double)line_wait / severd-1.0)<<endl;
+// 			cout<<"average number of customer per hour: "<<perhour<<endl;
+// 			break;
+// 		}
+// 		perhour++;
+// 	}
+// 	return 0;
+// }
+
+// bool NewCustomer(double x)
+// {
+// 	return (std::rand() *x /RAND_MAX <1);
+// }
+
+
+
+
+/*
+//Task 6
+
+const int MIN_PER_HOUR = 60;
+bool NewCustomer(double x);
+int main()
 {
-private:
-	long arrive;
-	int processtime;
+	using namespace std;
+	srand(time(0));
 
-public:
-	Customer() :arrive(0), processtime(0) {}
-	void Set(long when);
-	long When()const { return arrive; }
-	long Ptime()const { return processtime; }
-};
+    cout << "Case Study: Bank of Heather Automatic Teller\n";
+    cout << "Enter maximum size of queue: ";
+    int qs;
+    cin >> qs;
+ 
+    cout << "Enter the number of simulation hours: ";
+    int hours;
+    cin >> hours;
+    long cyclelimit = MIN_PER_HOUR*hours;
+ 
+    Item temp;
+    double perhour=1;
+    long lastturnaways=0;
+    long lastcustomers=0;
+    long lastserved=0;
+    long lastsum_line1=0;
+    long lastsum_line2=0;
+    long lastline_wait=0;
 
-typedef Customer Item;
 
-class Queue
-{
-private:
-	struct Node
+	while (true)
 	{
-		Item item;
-		struct  Node* next;
-	};
+		Queue line1(qs);
+		Queue line2(qs);
 
-	enum{Q_Size = 10};
+        double min_per_cust;
+        min_per_cust=MIN_PER_HOUR/perhour;
+ 
+        long turnaways=0;
+        long customers=0;
+        long served=0;
+        long line_wait=0;
+ 
+        int wait_time1=0;
+        long sum_line1=0;
+        int wait_time2=0;
+        long sum_line2=0;
 
-	Node* front;
-	Node* rear;
+		for(int cycle = 0; cycle < cyclelimit; cycle++)
+		{
+			if(line1.IsFull() && line2.IsFull())
+			{
+				turnaways++;
+			}
+			if(line1.QueueCount() < line2.QueueCount())
+			{
+				customers++;
+				temp.Set(cycle);
+				line1.EnQueue(temp);
+			}
+			else
+			{
+				customers++;
+				temp.Set(cycle);
+				line2.EnQueue(temp);
+			}
 
-	int items;
-	const int qSize;
-	Queue(const Queue& q):qSize(0){}
-	Queue& operator=(const Queue& q) { return *this; }
+			if(wait_time1 <=0 && !line1.IsEmpty())
+			{
+				line1.DeQueue(temp);
+				wait_time1 = temp.Ptime();
+				line_wait += cycle-temp.When();
+				served++;
 
-public:
-	Queue(int qs = Q_Size);
-	~Queue();
-	bool IsEmpty()const;
-	bool IsFull()const;
-	int QueueCount()const;
-	bool EnQueue(const Item& item);
-	bool DeQueue(Item& item);
-};
+			}
+
+			if(wait_time2 <=0 && !line2.IsEmpty())
+			{
+				line2.DeQueue(temp);
+				wait_time2 = temp.Ptime();
+				line_wait+=cycle - temp.When();
+				served++;
+			}
+			
+			if(wait_time1 > 0)
+			{
+				wait_time1--;
+			}
+			if(wait_time2 > 0)
+			{
+				wait_time2--;
+			}
+
+			sum_line1 += line1.QueueCount();
+			sum_line2 += line2.QueueCount();
+		}
+
+		if (fabs((double)line_wait / served-1.0)<0.1)
+		{
+
+			cout << "average wait time lower than 1 minutes needs " << perhour << " customers per hour.\n";
+
+			cout << "customers accepted: " << customers << endl;
+			cout << "  customers served: " << served << endl;
+			cout << "         turnaways: " << turnaways << endl;
+			cout << "average queue1 size: ";
+			cout.precision(2);
+			cout.setf(ios_base::fixed, ios_base::floatfield);
+
+			cout << (double)lastsum_line1 / cyclelimit << endl;
+			cout << "average queue2 size: ";
+			cout << (double)lastsum_line2 / cyclelimit << endl;
+			cout << " average wait time: " << (double)line_wait / served << " minutes\n";
+			break;
+		}
+		perhour++;
+	}
+	return 0;
+}
+
+bool NewCustomer(double x)
+{
+	return(std::rand()*x /RAND_MAX <1);
+}
+*/
+
