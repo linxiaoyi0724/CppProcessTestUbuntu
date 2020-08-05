@@ -304,7 +304,10 @@ void Bravo(const Cd& disk)
 
 
 
+/*
+Task 4
 #include <iostream>
+#include <cstring>
 using namespace std;
 class ABC
 {
@@ -318,6 +321,7 @@ public:
 	virtual ~ABC();
 	virtual ABC& operator=(const ABC& ac) = 0;
 	friend std::ostream& operator<<(std::ostream& os, const ABC& ac);
+	virtual void View();
 };
 
 class baseABC : public ABC
@@ -327,6 +331,7 @@ public:
 	baseABC(const baseABC& bc);
 	virtual ~baseABC() {};
 	friend std::ostream& operator<<(std::ostream& os, const baseABC& bc);
+	virtual void View();
 };
 
 class lacksDMA : public ABC
@@ -339,6 +344,7 @@ public:
 	lacksDMA(const char* c = "blank", const char* l = "null", int r = 0);
 	lacksDMA(const char* c, const ABC& ac);
 	friend std::ostream& operator<<(std::ostream& os, const lacksDMA& ls);
+	virtual void View();
 };
 
 class hasDMA : public ABC
@@ -352,6 +358,7 @@ public:
 	~hasDMA();
 	virtual hasDMA& operator=(const hasDMA& hs);
 	friend std::ostream& operator<<(std::ostream& os, const hasDMA& hs);
+	virtual void View();
 };
 
 ABC::ABC(const char* l, int r) :rating(r)
@@ -390,6 +397,11 @@ std::ostream&  operator<<(std::ostream& os, const ABC& ac)
 	os << "rating: " << ac.rating << endl;
 }
 
+void ABC::View()
+{
+	cout << *this <<endl;
+}
+
 baseABC::baseABC(const char* l, int r) : ABC(l,r)
 {
 
@@ -404,6 +416,11 @@ std::ostream& operator<<(std::ostream& os, const baseABC& bc)
 {
 	os << (const ABC&)bc;
 	return os;
+}
+
+void baseABC::View()
+{
+	cout << *this <<endl;
 }
 
 lacksDMA::lacksDMA(const char* c, const char* l, int r) :ABC(l,r)
@@ -422,7 +439,224 @@ std::ostream& operator<<(std::ostream& os, const lacksDMA& ls)
 	os << "color: " << ls.color << endl;
 }
 
-hasDMA::hasDMA(const char* s, const char* l, int r)
-{
 
+void lacksDMA::View()
+{
+	cout << *this <<endl;
 }
+
+hasDMA::hasDMA(const char* s, const char* l, int r):ABC(l,r)
+{
+	style = new char[std::strlen(s) +1];
+	std::strcpy(style,s);
+}
+
+hasDMA::hasDMA(const char* s, const ABC& ac):ABC(ac)
+{
+	style = new char[std::strlen(s) +1];
+	std::strcpy(style,s);
+}
+
+hasDMA::hasDMA(const hasDMA& hs):ABC(hs)
+{
+	style = new char[std::strlen(hs.style) +1];
+	std::strcpy(style,hs.style);
+}
+hasDMA::~hasDMA()
+{
+	delete[] style;
+}
+
+hasDMA& hasDMA::operator=(const hasDMA& hs)
+{
+	if(this == &hs)
+	{
+		return *this;
+	}
+
+	delete[] style;
+	ABC::operator=(hs);
+	style = new char[std::strlen(hs.style) +1];
+	std::strcpy(style, hs.style);
+}
+
+std::ostream& operator<<(std::ostream& os, const hasDMA& hs)
+{
+	os<<(const ABC& )hs;
+	os<<"Style: " << hs.style <<endl;
+}
+
+void hasDMA::View()
+{
+	cout << *this <<endl;
+}
+*/
+
+
+
+/*
+//Task 5
+#include <iostream>
+#include <cstring>
+using namespace std;
+class Port
+{
+private:
+	char* brand;
+	char style[20];
+	int bottles;
+
+public:
+	Port(const char* br = "none",const char* st = "none", int b = 0);
+	Port(const Port& p);
+	virtual ~Port(){delete[] brand;}
+	Port& operator=(const Port& p);
+	Port& operator+=(int b);
+	Port& operator-=(int b);
+	int BottleCount()const{return bottles;}
+	virtual void Show()const;
+	friend ostream& operator<<(ostream& os, const Port& p);
+};
+
+class VintagePort : public Port
+{
+private:
+	char * nickname;
+	int year;
+
+public:
+	VintagePort();
+	VintagePort(const char* br, int b, const char* nn, int y);
+	VintagePort(const VintagePort& vp);
+	~VintagePort(){delete[] nickname;}
+	VintagePort& operator=(const VintagePort& vp);
+	void Show()const;
+	friend ostream& operator<<(ostream & os, const VintagePort& vp);
+};
+
+Port::Port(const char* br, const char* st, int b)
+{
+	brand = new char[std::strlen(br) +1];
+	std::strcpy(brand, br);
+	std::strcpy(style, st);
+	bottles = b;
+}
+
+Port::Port(const Port& p)
+{
+	brand = new char[std::strlen(p.brand) +1];
+	std::strcpy(brand, p.brand);
+	std::strcpy(style,p.style);
+	bottles = p.bottles;
+}
+
+Port& Port::operator=(const Port& p)
+{
+	if(this == &p)
+	{
+		return *this;
+	}
+	brand = new char[std::strlen(p.brand) +1];
+	std::strcpy(brand, p.brand);
+	std::strcpy(style,p.style);
+	bottles = p.bottles;
+	return *this;
+}
+
+Port& Port::operator+=(int b)
+{
+	bottles += b;
+	return *this;
+}
+
+Port& Port::operator-=(int b)
+{
+	if(b <= bottles)
+	{
+		bottles -= b;
+	}
+	else
+	{
+		cout << "Eorr" <<endl;
+	}
+	return *this;
+}
+
+void Port::Show()const
+{
+	cout << "Brand: " <<brand<<endl;
+	cout << "Kind: " << style <<endl;
+	cout << "Bottles: "<<bottles <<endl; 
+}
+
+ostream& operator<<(ostream& os, const Port& p)
+{
+	os<<p.brand <<", " << p.style << ", " << p.bottles;
+}
+
+VintagePort::VintagePort():Port(){}
+
+VintagePort::VintagePort(const char* br, int b, const char* nn, int y):Port(br,"none",b)
+{	
+	nickname = new char[std::strlen(nn)+1];
+	std::strcpy(nickname,nn);
+	year = b;
+}
+
+VintagePort::VintagePort(const VintagePort& vp) : Port(vp)
+{
+	nickname = new char[std::strlen(vp.nickname)+1];
+	std::strcpy(nickname,vp.nickname);
+	year = vp.year;
+}
+
+VintagePort& VintagePort::operator=(const VintagePort& vp)
+{
+	if(this == &vp)
+	{
+		return *this;
+	}
+
+	Port::operator=(vp);
+	nickname = new char[std::strlen(vp.nickname)+1];
+	std::strcpy(nickname,vp.nickname);
+	year = vp.year;
+	return *this;
+}
+
+void VintagePort::Show()const
+{
+	Port::Show();
+	cout << "nickname: " <<nickname<<endl;
+	cout << "year: " << year <<endl;
+}
+
+ostream& operator<<(ostream& os, const VintagePort& vp)
+{
+	os << (const Port&) vp;
+	os << ",nickname: " << vp.nickname << " ,year: "<<vp.year;
+}
+
+
+int main()
+{
+	Port p1;
+	Port p2("Gallo","tawny",20);
+	p1.Show();
+	p2.Show();	
+	p1=p2;
+	p1.Show();
+	p1+=12;
+	p2-=8;
+	cout<<p1<<endl<<p2<<endl;	
+	VintagePort p3("Gallo", 24, "Old Velvet", 16);
+	p3.Show();
+	p3+=5;
+	cout<<p3<<endl;
+	p3-=30;
+	cout<<p3<<endl;	
+	return 0;
+}
+*/
+
+
