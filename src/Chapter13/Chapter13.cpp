@@ -402,10 +402,27 @@ baseABC::baseABC(const baseABC& bc) : ABC(bc)
 
 std::ostream& operator<<(std::ostream& os, const baseABC& bc)
 {
-	cout << (const ABC&)bc;
+	os << (const ABC&)bc;
+	return os;
 }
 
 lacksDMA::lacksDMA(const char* c, const char* l, int r) :ABC(l,r)
 {
 	std::strcpy(color, c);
+}
+
+lacksDMA::lacksDMA(const char* c, const ABC& ac) :ABC(ac)
+{
+	std::strcpy(color, c);
+}
+
+std::ostream& operator<<(std::ostream& os, const lacksDMA& ls)
+{
+	os << (const ABC&)ls;
+	os << "color: " << ls.color << endl;
+}
+
+hasDMA::hasDMA(const char* s, const char* l, int r)
+{
+
 }
