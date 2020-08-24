@@ -1,3 +1,4 @@
+/*
 // Task1
 #include <iostream>
 #include <valarray>
@@ -98,6 +99,130 @@ void Wine::Show()const
 int Wine::sum()
 {
 	return vintageAndCounts.Sum();
+}
+
+int main()
+{
+	cout << "Enter name of wine: ";
+	char lab[50];
+	cin.getline(lab, 50);
+	cout << "Enter number of year: ";
+	int yrs;
+	cin >> yrs;
+
+	Wine holding(lab, yrs);
+	holding.GetBottles();
+	holding.Show();
+
+	const int YRS = 3;
+	int y[YRS] = { 1993, 1995, 1998 };
+	int b[YRS] = { 48, 60, 72 };
+
+	Wine more("Gushing Grape Red", YRS, y, b);
+	more.Show();
+	cout << "Total bottles for " << more.Label() << ": " << more.sum() << endl;
+	cout << "Bye" << endl;
+	return 0;
+}
+*/
+
+
+
+
+//Task2
+
+#include <iostream>
+#include <valarray>
+#include <string>
+using namespace std;
+
+template<typename T1, typename T2>
+class Pair
+{
+private:
+	T1 a;
+	T2 b;
+
+public:
+	Pair(const T1& aval, const T2& bval): a(aval), b(bval){}
+	Pair(){}
+	void Set(T1& yr, T2& bot);
+	int Sum();
+	void Show()const;
+};
+
+typedef valarray<int> ArrayInt;
+typedef Pair<valarray<int>, valarray<int>> pariArray;
+
+class Wine : private string, private pariArray
+{
+private:
+	int yrs;
+
+public:
+	Wine(const char* l, int y, const int yr[], const int bot[]);
+	Wine(const char* l, int y);
+	void GetBottles();
+	std::string& Label();
+	int sum();
+	void Show()const;
+};
+
+template<typename T1, typename T2>
+void Pair<T1, T2>::Set(T1& yr, T2& bot)
+{
+	a = yr;
+	b = bot;
+}
+
+template<typename T1, typename T2>
+int Pair<T1, T2>::Sum()
+{
+	return b.sum();
+}
+
+template<typename T1, typename T2>
+void Pair<T1,T2>::Show()const
+{
+	for(int i= 0; i < a.size();i++)
+	{
+		cout <<  "\t\t" <<a[i] << "\t\t" << b[i] << endl;
+	}
+}
+
+Wine::Wine(const char* l, int y, const int yr[], const int bot[]):yrs(y),string(l),pariArray(ArrayInt(yr, y),ArrayInt(bot, y)){}
+
+Wine::Wine(const char* l, int y):yrs(y),string(l){}
+
+void Wine::GetBottles()
+{
+	ArrayInt yr(yrs), bot(yrs);
+	cout << "Enter " << (const string&) *this << "data for " << yrs << "year(s): " << endl;
+	for (int i = 0; i < yrs; i++)
+	{
+		cout << "Enter year: ";
+		cin >> yr[i];
+		cout << "Enter bottles for that year: ";
+		cin >> bot[i];
+	}
+	pariArray::Set(yr, bot);
+}
+
+string& Wine::Label()
+{
+	return (string&) *this;
+}
+
+void Wine::Show()const
+{
+	cout << "Wine: " << (const string&) *this << endl;
+	cout << "\t\t year \t\t Bottles " << endl;
+	pariArray::Show();
+}
+
+int Wine::sum()
+{
+	return pariArray::Sum();
 }
 
 int main()
